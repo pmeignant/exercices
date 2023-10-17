@@ -15,7 +15,44 @@ public class SplitTwoList {
      * @return {@link TwoList} avec le pivot qui est la valeur la plus proche de la moyenne
      */
     public static TwoList twoList(List<Integer> vals) {
-        return new TwoList();
+
+        if (vals == null || vals.isEmpty()) {
+            return new TwoList();
+        }
+
+        double sum = vals.stream().mapToDouble(Integer::doubleValue).sum();
+        double average = sum / vals.size();
+        int index = 0;
+        double closestDifference = average - vals.get(0);
+
+        for (int i = 1; i < vals.size(); i++) {
+            double difference = average - vals.get(i);
+
+            if (difference * difference < closestDifference * closestDifference) {
+                closestDifference = difference;
+                index = i;
+            }
+        }
+
+        int pivot = vals.get(index);
+
+        List<Integer> left = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+        boolean pivotAdded = false;
+
+        for (int value : vals) {
+            if (value == pivot && !pivotAdded) {
+                pivotAdded = true;
+                continue;
+            }
+            if (value <= pivot) {
+                left.add(value);
+            } else {
+                right.add(value);
+            }
+        }
+
+        return new TwoList(pivot, left, right);
     }
 
     public static void main (String[] args) {

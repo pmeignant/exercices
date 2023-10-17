@@ -10,7 +10,25 @@ public class NearMean {
      * @return l'entier dans la liste le plus proche de la moyenne des valeurs
      */
     public static int nearMean(List<Integer> vals) {
-        return 0;
+        if (vals == null || vals.isEmpty()) {
+            return 0;
+        }
+
+        double sum = vals.stream().mapToDouble(Integer::doubleValue).sum();
+        double average = sum / vals.size();
+        int index = 0;
+        double closestDifference = average - vals.get(0);
+
+        for (int i = 1; i < vals.size(); i++) {
+            double difference = average - vals.get(i);
+
+            if (difference * difference < closestDifference * closestDifference) {
+                closestDifference = difference;
+                index = i;
+            }
+        }
+
+        return vals.get(index);
     }
 
     public static void main (String[] args) {

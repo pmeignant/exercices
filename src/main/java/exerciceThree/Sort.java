@@ -1,8 +1,10 @@
 package exerciceThree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class Sort {
@@ -13,7 +15,10 @@ public class Sort {
      * @return liste d'entier trié en ordre croissant
      */
     private static List<Integer> sort(List<Integer> vals) {
-        return List.of();
+        if (vals == null || vals.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return vals.stream().sorted().collect(Collectors.toList());
     }
 
     public static void main (String[] args) {
