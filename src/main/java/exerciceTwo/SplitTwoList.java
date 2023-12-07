@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class SplitTwoList {
     /**
      * trouve la valeur la plus proche de la moyenne de la liste et sépare en deux listes les autres valeurs de la liste
+     * pivot: la valeur de la liste la plus proche de la moyenne
      * left: inférieur (ou égal si doublon) au pivot
      * right: supérieur au pivot
      * @param vals list d'entier qui vont être séparer en deux
