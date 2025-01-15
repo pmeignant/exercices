@@ -10,7 +10,16 @@ public class NearMean {
      * @return l'entier dans la liste le plus proche de la moyenne des valeurs
      */
     public static int nearMean(List<Integer> vals) {
-        return 0;
+
+        if (vals == null || vals.isEmpty()) {
+            return 0;
+        }
+
+        double mean = vals.stream().mapToInt(Integer::intValue).average().orElse(0);
+
+        return vals.stream()
+                .min((a, b) -> Double.compare(Math.abs(mean - a), Math.abs(mean - b)))
+                .orElse(0);
     }
 
     public static void main (String[] args) {
