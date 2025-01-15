@@ -1,9 +1,9 @@
 package exerciceTwo;
 
-import java.util.ArrayList;
+import exerciceOne.NearMean;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class SplitTwoList {
@@ -16,7 +16,28 @@ public class SplitTwoList {
      * @return {@link TwoList} avec le pivot qui est la valeur la plus proche de la moyenne
      */
     public static TwoList twoList(List<Integer> vals) {
-        return new TwoList();
+        if (vals == null || vals.isEmpty()) {
+            return new TwoList();
+        }
+
+        int pivot = NearMean.nearMean(vals);
+
+        long pivotCount = vals.stream().filter(val -> val == pivot).count();
+
+        List<Integer> left = vals.stream()
+                .filter(val -> val < pivot)
+                .collect(Collectors.toList());
+
+        // Ajout du pivot si doublons
+        if (pivotCount > 1) {
+            left.add(pivot);
+        }
+
+        List<Integer> right = vals.stream()
+                .filter(val -> val > pivot)
+                .collect(Collectors.toList());
+
+        return new TwoList(pivot, left, right);
     }
 
     public static void main (String[] args) {
