@@ -18,7 +18,7 @@ public class NearMean {
         double mean = vals.stream().mapToInt(Integer::intValue).average().orElse(0);
 
         return vals.stream()
-                .min((a, b) -> Double.compare(Math.abs(mean - a), Math.abs(mean - b)))
+                .min(Comparator.comparingDouble(a -> Math.abs(mean - a)))
                 .orElse(0);
     }
 
