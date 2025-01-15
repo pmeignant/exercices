@@ -2,6 +2,7 @@ package exerciceThree;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class Sort {
@@ -12,10 +13,15 @@ public class Sort {
      * @return liste d'entier trié en ordre croissant
      */
     private static List<Integer> mergeSort(List<Integer> vals) {
-        return List.of();
+        if (vals == null || vals.isEmpty()) {
+            return List.of();
+        }
+        return vals.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         List<Integer> dataTest1 = null;
 
         List<Integer> dataTest2 = List.of();
